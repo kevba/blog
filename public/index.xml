@@ -21,5 +21,27 @@
 </description>
     </item>
     
+    <item>
+      <title>About</title>
+      <link>https://kevba.com/about/</link>
+      <pubDate>Fri, 18 May 2018 20:00:51 +0200</pubDate>
+      
+      <guid>https://kevba.com/about/</guid>
+      <description>&lt;p&gt;Developer of all kinds of software. Currently working with a lot of Go and Python&lt;/p&gt;
+
+&lt;p&gt;Interesting project I contribute to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/AdvancedClimateSystems/io&#34;&gt;&lt;strong&gt;IO&lt;/strong&gt;&lt;/a&gt; - A package with contains all kinds of drivers to work with microchips and such.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I can be found on:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/kevba&#34;&gt;&lt;strong&gt;GitHub&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
   </channel>
 </rss>
