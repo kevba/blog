@@ -1,0 +1,8 @@
+baseURL = "https://kevba.com"
+languageCode = "en-us"
+title = "Kevba"
+
+theme = "one"
+
+[params]
+    navigation = ["archives.md", "about.md"]
