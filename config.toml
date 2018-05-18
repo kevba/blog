@@ -1,9 +1,7 @@
 baseURL = "https://kevba.com/"
 languageCode = "en-us"
 title = "Kevba"
-
 theme = "one"
 
 [params]
-	subtitle = "mostly software"
     navigation = ["archives.md", "about.md"]
