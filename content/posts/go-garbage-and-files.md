@@ -65,7 +65,7 @@ Huh, an error message. Somehow the file descriptor from the watched file has bec
 
 Did this mean the file was closed somehow? I added a defer call to [SetEdge][SetEdge] which would close the file after 10 seconds of opening it. I did this in SetEdge because it opens the file and passes the file descriptor to [AddEvent][AddEvent]. As expected, the same bug occured, exactly when the file got closed.
 
-Then it hit me: what happens when the file got garbage collected? The file never got closed, but I did not keep a reference to it anywhere, since a file descriptor is just an integer. So maybe when the file object itself got garbage collected, the file got closed and the file descriptor becomes invalid.
+Then it hit me: what happens when the file object got garbage collected? The file never got closed, but I did not keep a reference to it anywhere, since a file descriptor is just an integer. So maybe when the file object itself got garbage collected, the file got closed and the file descriptor becomes invalid.
 
 ### The fix
 
@@ -73,7 +73,7 @@ This is easy to test, just pass a pointer to the file to AddEvent and store it i
 
 So I ran the script. And waited. Then waited some more. After 10 minutes and 30,000 callbacks the script was still functioning.
 
-Great, now I know how to fix it, but I'm still not sure why this happens. So i decided to dive into the Go source code, specifically [os.file](https://golang.org/src/os/file_unix.go).
+Great, now I know how to fix it, but I'm still not sure why this happens. So I decided to dive into the Go source code, specifically [os.file](https://golang.org/src/os/file_unix.go).
 After some searching I noticed a function called [SetFinalizer](https://golang.org/src/os/file_unix.go?#L132). This function gets called in newFile, which gets called when a new file is opened. A function given as an argument to Finalizer gets called when the object given as the first arguemnt gets garbage collected. In the case of our file, the file gets closed.
 This perfectly explains why the file descripter became invalid. The file simply got closed!   
 
