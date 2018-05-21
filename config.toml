@@ -4,4 +4,4 @@ title = "Kevba"
 theme = "one"
 
 [params]
-    navigation = ["archives.md", "about.md"]
+    navigation = ["about.md"]
