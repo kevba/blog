@@ -1,7 +1,7 @@
 ---
-title: "Go Garbage and Files"
-date: 2018-05-18T21:11:33+02:00
-draft: true
+title: "Go Garbage Collection and Files"
+date: 2018-05-21T21:11:33+02:00
+draft: false
 ---
 
 ### Some context
