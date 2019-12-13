@@ -67,7 +67,39 @@ Now we are ready to compile! to compile just at91bootstrap run the follwoing com
 ``` 
 Go grab a beverage of your choosing, bacause compiling might take a while. 
 
+After the build is done the resulting image must be flashed to the chip.
 
+## Flashing the image
+It is possible to write to the NAND from the ariaG25 by using [sam-ba][1]. I am using version 2.7 because the newer 3.x version see to have some issues running on my machine. The serial port of the AriaG25 must be connected to your PC. 
+
+Before using sam-ba the AriaG25 must be put in the `rom-boot` mode. This can be done by shorting two pins on the chip as shown in the image below.
+
+If you're using something like minicom you should see `rom boot` in the logs. Make sure to disconnect minicom now, only one device can use a serial port at a time.
+
+Now that the chip is in rom-boot, run the following command with samba:
+```
+sudo sam-ba -p serial:ttyUSB0 -b sam9xx5-ek -a extram
+```
+
+This will initilize the memory of the chip. This command must always be run after putting the chip in rom-boot.
+
+Now the chip is ready and the at91bootstrap image can be flashed. The command to do this is:
+```
+sudo sam-ba -p serial:ttyUSB0 -b sam9xx5-ek -a nandflash -c erase:0x0:0x40000 -c writeboot:at91bootstrap.bin; \
+```
+If your at91bootstrap image is larger than `0x40000` modify that part of the commando so that it is larger than your image.
+
+Tada! The bootloader is now flahed onto the device. YOu should be able to boot normally now.
+
+## Final notes
+During the flasing of the image, the original tpl (u-boot) might eb partially overwritten. This means that after booting to at91bootstrap the system halts. If that is the case, sam-ba can eb used once agian to flash u-boot. 
+
+Set the system into rom-boot, initilize the memory. Now u-boot can be flashed using the following command:
+
+```
+sudo sam-ba -p serial:ttyUSB0 -b sam9xx5-ek -a nandflash -c erase:0x40000:0xc0000 -c write:u-boot.bin:0x40000; \
+```
 
 
 [0]: https://github.com/AdvancedClimateSystems/docker-buildroot
+[1]: https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/SAM-BA%20In-system%20Programmer
