@@ -1,16 +1,20 @@
+---
+title: "Compiling At91bootstrap"
+date: 2020-01-31T09:40:15+01:00
+draft: true
+---
+
 # Compiling At91Bootstrap for the Aria G25
 
-## Some context
-
-This device is build using an Aria G25 from corewind. Corewind themselves does offer prebuild files, including at91bootstrap, but those are quite old.
+This post will describe how to compile your own at91bootstrap. at91bootstrap is a bootloader used in `Atmel AT91 SoC` like the Aria G25.
 
 ## Why would you do this in the first place?
 
-While trying to update Linux kernel I discovered that u-boot had to be updated as well, since the gcc version has updated. Updating u-boot mde the u-boot binary just slighty larger. This caused a problem with at91bootstrap. at91bootstrap loads bootstrap into memory, so it needs to know how large u-boot is. So a new version of at91bootstrap must be compiled with an increaded size for u-boot.
+While trying to update Linux kernel I discovered that u-boot had to be updated as well, because the GCC version had increased. Updating u-boot made the u-boot binary just slighty larger. This caused a problem with at91bootstrap. at91bootstrap loads bootstrap into memory, so it needs to know how large u-boot is. So a new version of at91bootstrap must be compiled so it can load the new larger u-boot.
 
 ## Neccesary setup 
 
-The buildroot used can be found [here][0]. This post assumes you have some idea of how this setup works. Still, the commands needed to setup the various containers are described below.
+Buildroot is used to compile the rootfs, and all other things needed to create a linux device. The buildroot used can be found [here][0]. This post assumes you have some idea of how this setup works. Still, the commands needed to setup the various containers are described below.
 
 You need a container to store the build results and build cache. It can be created like this:
 ```
@@ -33,13 +37,13 @@ To see all existing configs run:
 
 Since I am using the Aria G25, I am using the `acmesystems_aria_g25_256mb_defconfig` defconfig. 
 
-First lauch menuconfig using the docker container. This an be done something like this:
+First lauch menuconfig using the docker container. This can be done  like this:
 
 ```
-./scripts/run.sh make acmesystems_aria_g25_256mb_defconfig menuconfig
+./scripts/run.sh make acmesystems_Aria_g25_256mb_defconfig menuconfig
 ```
 
-This will open builtroots menuconfig. Open the bootloaders menu, from here the bootloaders can be configured. 
+This will open buildroots menuconfig. Open the bootloaders menu, from here the bootloaders can be configured. 
 The default configuration uses AT91bootstrap3, which is exactly what we need. U-Boot is disabeld however. Since we want to boot to U-boot from at91bootstrap is should be enabled.
 
 ## at91bootstrap configuration
@@ -48,7 +52,7 @@ at91bootstrap has its own menuconfig. It can be opened using the following comma
 ./scripts/run.sh make at91bootstrap3-menuconfig
 ``` 
 
-By default at91bootsstrap is configured to start for an SDcard. I want to use the NAND on the aria G25. This menas we need to configure that as well.
+By default at91bootsstrap is configured to start for an SDcard. I want to use the NAND on the Aria G25. This menas we need to configure that as well.
 
 Navigate to the `memory selection` submenu. Change the `Flash Memory Technology` to `NAND flash`
 
@@ -65,14 +69,16 @@ Now we are ready to compile! to compile just at91bootstrap run the follwoing com
 ```
 ./scripts/run.sh make at91bootstrap3-build
 ``` 
-Go grab a beverage of your choosing, bacause compiling might take a while. 
+Go grab some coffe, bacause compiling might take a while. 
 
 After the build is done the resulting image must be flashed to the chip.
 
 ## Flashing the image
-It is possible to write to the NAND from the ariaG25 by using [sam-ba][1]. I am using version 2.7 because the newer 3.x version see to have some issues running on my machine. The serial port of the AriaG25 must be connected to your PC. 
+It is possible to write to the NAND from the Aria G25 by using [sam-ba][1]. I am using version 2.7 because the newer 3.x version see to have some issues running on my machine. The serial port of the Aria G25 must be connected to your PC. 
 
-Before using sam-ba the AriaG25 must be put in the `rom-boot` mode. This can be done by shorting two pins on the chip as shown in the image below.
+Before using sam-ba the Aria G25 must be put in the `rom-boot` mode. This can be done by shorting two pins on the chip as shown in the image below.
+
+![An error message!](/images/go-garbage-and-files/ariag25.png)
 
 If you're using something like minicom you should see `rom boot` in the logs. Make sure to disconnect minicom now, only one device can use a serial port at a time.
 
@@ -92,7 +98,7 @@ If your at91bootstrap image is larger than `0x40000` modify that part of the com
 Tada! The bootloader is now flahed onto the device. YOu should be able to boot normally now.
 
 ## Final notes
-During the flasing of the image, the original tpl (u-boot) might eb partially overwritten. This means that after booting to at91bootstrap the system halts. If that is the case, sam-ba can eb used once agian to flash u-boot. 
+During the flashing of the image, the original tpl (u-boot) might be partially overwritten. This means that after booting to at91bootstrap the system halts. If that is the case, sam-ba can be used once again to flash u-boot. 
 
 Set the system into rom-boot, initilize the memory. Now u-boot can be flashed using the following command:
 
