@@ -10,7 +10,7 @@ This post will describe how to compile your own at91bootstrap. at91bootstrap is 
 
 ## Why would you do this in the first place?
 
-While trying to update Linux kernel I discovered that u-boot had to be updated as well, because the GCC version had increased. Updating u-boot made the u-boot binary just slighty larger. This caused a problem with at91bootstrap. at91bootstrap loads bootstrap into memory, so it needs to know how large u-boot is. So a new version of at91bootstrap must be compiled so it can load the new larger u-boot.
+While trying to update Linux kernel I discovered that U-Boot had to be updated as well, because the GCC version had increased. Updating U-Boot made the U-Boot binary just slighty larger. This caused a problem with at91bootstrap. at91bootstrap loads bootstrap into memory, so it needs to know how large U-Boot is. So a new version of at91bootstrap must be compiled so it can load the new larger U-Boot.
 
 ## Neccesary setup 
 
@@ -44,7 +44,7 @@ First lauch menuconfig using the docker container. This can be done  like this:
 ```
 
 This will open buildroots menuconfig. Open the bootloaders menu, from here the bootloaders can be configured. 
-The default configuration uses AT91bootstrap3, which is exactly what we need. U-Boot is disabeld however. Since we want to boot to U-boot from at91bootstrap is should be enabled.
+The default configuration uses AT91bootstrap3, which is exactly what we need. U-Boot is disabeld however. Since we want to boot to U-Boot from at91bootstrap is should be enabled.
 
 ## at91bootstrap configuration
 at91bootstrap has its own menuconfig. It can be opened using the following command:
@@ -56,12 +56,12 @@ By default at91bootsstrap is configured to start for an SDcard. I want to use th
 
 Navigate to the `memory selection` submenu. Change the `Flash Memory Technology` to `NAND flash`
 
-To load U-boot into RAM the `Image Loading Strategy` must be changed to   `Load U-Boot into last MBYTE of SDRAM`
+To load U-Boot into RAM the `Image Loading Strategy` must be changed to   `Load U-Boot into last MBYTE of SDRAM`
 
-Thansk to our previous options, some new options have become available in the `U-Boot Image Storage Setup` menu. These options are needed to load u-boot into memory. The first option is ` Flash Offset for U-Boot`. It is the address on the NAND where u-boot iamge begins. The second option called `U-Boot Image Size` is teh size of the u-boot iamge on the NAND. These two options can difffer per board, or even per u-boot build. In my case, u-boot is stored at `0x00040000`, which is the same as the default.
-My u-boot iamge is slightly largerm because I am using a custom build. So the  `U-Boot Image Size` has to be increased. In my case it needed to be set to  `0x00100000`. 
+Thansk to our previous options, some new options have become available in the `U-Boot Image Storage Setup` menu. These options are needed to load U-Boot into memory. The first option is ` Flash Offset for U-Boot`. It is the address on the NAND where U-Boot iamge begins. The second option called `U-Boot Image Size` is teh size of the U-Boot iamge on the NAND. These two options can difffer per board, or even per U-Boot build. In my case, U-Boot is stored at `0x00040000`, which is the same as the default.
+My U-Boot iamge is slightly largerm because I am using a custom build. So the  `U-Boot Image Size` has to be increased. In my case it needed to be set to  `0x00100000`. 
 
-The last option is called `The External Ram Address to Load U-Boot Image`. It tells at91bootstrap to which address in RAM< the u-boot iamge must be loaded. the default option of `0x22000000` is fine.
+The last option is called `The External Ram Address to Load U-Boot Image`. It tells at91bootstrap to which address in RAM< the U-Boot iamge must be loaded. the default option of `0x22000000` is fine.
 
 
 ## Compiling!
@@ -78,7 +78,7 @@ It is possible to write to the NAND from the Aria G25 by using [sam-ba][1]. I am
 
 Before using sam-ba the Aria G25 must be put in the `rom-boot` mode. This can be done by shorting two pins on the chip as shown in the image below.
 
-![An error message!](/images/go-garbage-and-files/ariag25.png)
+![The pins that must be short for rom boot](/images/compiling-at91bootstrap/ariag25.png)
 
 If you're using something like minicom you should see `rom boot` in the logs. Make sure to disconnect minicom now, only one device can use a serial port at a time.
 
@@ -98,12 +98,12 @@ If your at91bootstrap image is larger than `0x40000` modify that part of the com
 Tada! The bootloader is now flahed onto the device. YOu should be able to boot normally now.
 
 ## Final notes
-During the flashing of the image, the original tpl (u-boot) might be partially overwritten. This means that after booting to at91bootstrap the system halts. If that is the case, sam-ba can be used once again to flash u-boot. 
+During the flashing of the image, the original tpl (U-Boot) might be partially overwritten. This means that after booting to at91bootstrap the system halts. If that is the case, sam-ba can be used once again to flash U-Boot. 
 
-Set the system into rom-boot, initilize the memory. Now u-boot can be flashed using the following command:
+Set the system into rom-boot, initilize the memory. Now U-Boot can be flashed using the following command:
 
 ```
-sudo sam-ba -p serial:ttyUSB0 -b sam9xx5-ek -a nandflash -c erase:0x40000:0xc0000 -c write:u-boot.bin:0x40000; \
+sudo sam-ba -p serial:ttyUSB0 -b sam9xx5-ek -a nandflash -c erase:0x40000:0xc0000 -c write:U-Boot.bin:0x40000; \
 ```
 
 
