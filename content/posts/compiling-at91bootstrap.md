@@ -25,7 +25,7 @@ it is also assumed the latest image is build locally with the following command.
 ```
 docker build -t "advancedclimatesystems/buildroot" .
 ```
-Now thats out of the way, let build a bootloader.
+Now that's out of the way, let build a bootloader.
 
 ## Menuconfig configuration
 
