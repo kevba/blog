@@ -1,7 +1,7 @@
 ---
 title: "Compiling AT91Bootstrap"
-date: 2020-01-31T09:40:15+01:00
-draft: true
+date: 2020-02-14T10:11:33+02:00
+draft: false
 ---
 
 # Compiling AT91Bootstrap for the Aria G25
