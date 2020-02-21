@@ -1,7 +1,12 @@
 baseURL = "https://kevba.com/"
 languageCode = "en-us"
-title = "Kevba"
-theme = "one"
+title = "Kevba's Blog"
+theme = "hugo_theme_pickles"
 
 [params]
-    navigation = ["about.md"]
+  github = "kevba"
+
+  [[menu.main]]
+    name = "About"
+    url = "/about"
+    weight = 1
