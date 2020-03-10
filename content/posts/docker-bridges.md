@@ -4,9 +4,9 @@ date: 2020-02-21T09:09:49+01:00
 draft: true
 ---
 # Docker bridges
-Configuring networks is hard, and docker certainly did not make things easier. Since i'm no network expert most things i know come from trial and error. This post describes the process how I setup a docker bridge on a device that acts as a vpn router. 
+Configuring networks is hard, and docker certainly did not make things easier. Since I am no network expert most things I know come from trial and error. This post describes the process how I setup a docker bridge. 
 
-## Why would i need a docker bridge
+## Why would I need a docker bridge
 A docker bridge is needed when your containers must be reachable on the network your host is connected to. Each container will have an IP address in the same subnet as the host.
 
 Often you can just forward a port in most situations. However I needed to run multiple containers that use the same protocol, so each one of the containers needed use the same port. 
@@ -15,7 +15,7 @@ Often you can just forward a port in most situations. However I needed to run mu
 To setup a docker bridged network, two things need to be done. First a bridge must be created. If you're using networkd this is fairly easy.
 
 ### Setting up the bridge
-First create a file called `br0.netdev`. This file basically creates a new interface called `br0`.
+First create a file called `br0.netdev`. This file creates a new interface called `br0`.
 
 ``` 
 [NetDev]
@@ -23,7 +23,7 @@ Name=br0
 Kind=bridge
 ```
 
-Next, create a file called `br0.network`. This configures the bridge. I think this must always have a static IP if we want to use the bridge with docker, but i'm not sure.
+Next, create a file called `br0.network`. This configures the bridge. I think this must always have a static IP if we want to use the bridge with docker, but I am not sure.
 ```
 [Match]
 Name=br0
