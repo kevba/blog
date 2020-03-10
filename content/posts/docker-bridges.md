@@ -1,7 +1,7 @@
 ---
 title: "Docker Bridges"
-date: 2020-02-21T09:09:49+01:00
-draft: true
+date: 2020-03-10T16:10:49+01:00
+draft: false
 ---
 # Docker bridges
 Configuring networks is hard, and docker certainly did not make things easier. Since I am no network expert most things I know come from trial and error. This post describes the process how I setup a docker bridge. 
