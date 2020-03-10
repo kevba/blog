@@ -43,7 +43,8 @@ Bridge=br0
 ```
 
 ### Creating the docker network
-The next step is creating a docker network and adding it to the bridge. The gateway MUST be the IP of your bridge.If you do anything else, Docker will change the IP of the bridge.
+The next step is creating a docker network and adding it to the bridge. The gateway MUST be the IP of your bridge. 
+If you use anything else, Docker will change the IP of the bridge.
 
 The name of the network can be anything you like, as long its not is use yet. With `docker network ls` all networks are shown.
 ``` bash
@@ -55,12 +56,12 @@ docker network create \
     ${name-of-the-network}
 ```
 
-After a reboot the network is ready. You can now start containers on this network. These containers will be reachable anywhere in the network.
+After a reboot the network is ready. You can now start containers on this network. These containers will be reachable from anywhere in the network.
 
 ### Using the network
 You can start a container on the network by setting the `--network` option when starting the container.
 
-The container must also be assigned an IP address. IF no ip address is given docker simply assigns one, which can cause IP conflicts. The IP address can be set with the `--ip` flag.
+The container must also be assigned an IP address. If no ip address is given docker simply assigns one, which can cause IP conflicts. The IP address can be set with the `--ip` flag.
 
 The docker run command should look something like this:
 ``` bash
