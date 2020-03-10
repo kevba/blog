@@ -9,7 +9,7 @@ Configuring networks is hard, and docker certainly did not make things easier. S
 ## Why would I need a docker bridge
 A docker bridge is needed when your containers must be reachable on the network your host is connected to. Each container will have an IP address in the same subnet as the host.
 
-Often you can just forward a port in most situations. However I needed to run multiple containers that use the same protocol, so each one of the containers needed use the same port. 
+Often you can just forward a port. However I needed to run multiple containers that used the same protocol, so each one of the containers needed to use the same port. 
 
 ## A simple bridged network
 To setup a docker bridged network, two things need to be done. First a bridge must be created. If you're using networkd this is fairly easy.
