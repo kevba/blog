@@ -1,18 +1,16 @@
 ---
-title: "I want to be the very Bash-t"
+title: "Bash if statements"
 date: 2020-03-16T10:55:07+01:00
 draft: true
 ---
 
-# I want to be the very Bash-t
+# I wanna be the very Bash-t
 
 One of the things in bash that always confuses me are if statements. I never know how to write one without googling it.
-For example: Do i need two square brackets `[[ ` or just one `[ `. When should I use `-eq ` and when `==`?. Why are there even two options for all those things?.
-
-With this post I will attempt to anwser those questions to force myself to learn about them.
+For example: Do I need two square brackets `[[ ` or just one `[ `. When should I use `-eq ` and when `==`?. Why are there even two options for all those things?
 
 # The square bracket situation
-In bash an if statement can be written as follows:
+In bash an if-statement can be written as follows:
 
 ```bash
 if [ "$1" == "" ]; then echo "something"; fi
@@ -35,11 +33,13 @@ In general it is better to use the singe bracket, because it is compatible with 
 If the bash specific features are needed the double brackets can be used. Be aware your script might not work for everyone if you do this.
 If you use the double brackets be sure to add the `#!/bin/bash` statement to the top of your script.
 
-###  the `test` command
+###  the 'test' command
 The single single bracket syntax really is just a fancy way of calling the `test` command. The statement above is equivalent to:
 
 ```bash
 if test "$1" == "" ; then echo "something"; fi
 ```
 
-Basically everything between the brackets gets passed as an argument to `test`. You can call the test command in your terminal like any other program on your system. Executing something like `which test` will show you where the command can eb found on your system.
+Basically everything between the brackets gets passed as an argument to `test`. You can call the test command in your terminal like any other program on your system. Executing something like `which test` will show you where the command can be found on your system.
+
+# 
