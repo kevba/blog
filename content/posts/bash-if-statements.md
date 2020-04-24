@@ -1,7 +1,7 @@
 ---
 title: "Bash if statements"
 date: 2020-04-24T7:55:07+01:00
-draft: true
+draft: false
 ---
 
 One of the things in bash that always confuses me are if statements. I never know how to write one without googling it.
