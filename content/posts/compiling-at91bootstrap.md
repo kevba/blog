@@ -1,10 +1,8 @@
 ---
-title: "Compiling AT91Bootstrap"
+title: "Compiling AT91Bootstrap for the Aria G25"
 date: 2020-02-14T10:11:33+02:00
 draft: false
 ---
-
-# Compiling AT91Bootstrap for the Aria G25
 
 This post will describe how to compile your own AT91Bootstrap. AT91Bootstrap is a bootloader for the `Atmel AT91 SoC` like the Aria G25.
 

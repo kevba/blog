@@ -4,8 +4,6 @@ date: 2020-04-24T10:55:07+01:00
 draft: true
 ---
 
-# I wanna be the very Bash-t
-
 One of the things in bash that always confuses me are if statements. I never know how to write one without googling it.
 For example: Do I need two square brackets `[[ ` or just one `[ `. When should I use `-eq ` and when `==`?. Why are there even two options for all those things?
 
