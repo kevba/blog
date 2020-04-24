@@ -1,6 +1,6 @@
 ---
 title: "Bash if statements"
-date: 2020-03-16T10:55:07+01:00
+date: 2020-04-24T10:55:07+01:00
 draft: true
 ---
 
@@ -9,7 +9,7 @@ draft: true
 One of the things in bash that always confuses me are if statements. I never know how to write one without googling it.
 For example: Do I need two square brackets `[[ ` or just one `[ `. When should I use `-eq ` and when `==`?. Why are there even two options for all those things?
 
-This post is mostly an excuse to figure these things out and learn about them. It is by no means comprehensive, but it covers the basics.  
+This post is mostly an excuse to figure these things out and learn about them. It is by no means comprehensive.
 
 # The square bracket situation
 In bash an if-statement can be written as follows:
@@ -25,10 +25,10 @@ if [[ "$1" = "" ]]; then echo "something"; fi
 
 ## Whats the meaning of the extra square brackets?
 
-The single bracket `[ ]` means it is POSIX compliant. This means that a singe bracket is compatible with all POSIX compliant systems.
+The single bracket `[ ]` is defined by POSIX. This means that a singe bracket is compatible with all POSIX compliant systems.
 This includes most linux distributions so it runs pretty much on any system.
 
-The double bracket `[[ ]]`means it uses the extended bash specification. This means it can only run on systems which use bash. 
+The double bracket `[[ ]]` means it uses the extended bash specification. This means it can only run on systems which use bash. 
 
 ## Which one should I use.
 In general it is better to use the singe bracket, because it is compatible with most systems.
