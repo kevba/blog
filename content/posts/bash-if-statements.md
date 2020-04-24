@@ -1,6 +1,6 @@
 ---
 title: "Bash if statements"
-date: 2020-04-24T10:55:07+01:00
+date: 2020-04-24T7:55:07+01:00
 draft: true
 ---
 
